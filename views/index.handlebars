@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="jumbotron">
+      <h1>Mongo Scraper</h1>
+      <h2><i>"All the news that's fit to scrape!"</i></h2>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <a href="/scrape"><button type="button" class="btn btn-primary">Scrape New Articles</button></a>
+        </div>
+        <div class="col-6">
+            <button type="button" class="btn btn-primary">Go to Saved Articles</button>
+        </div>
+    </div>
+    <div>
+    {{#each article}}
+      <p>{{>article}}</p>
+    {{/each}}
+    </div>
+    
+      {{!-- <div id="articles"></div>
+      <div id="notes"></div> --}}
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="app.js"></script>
