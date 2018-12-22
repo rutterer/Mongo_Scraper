@@ -6,6 +6,28 @@
     </div>
     {{!-- <div class="card-body">
     </div> --}}
-    <button id="">SAVE</button>
-    <button data-id="{{this._id}}">DELETE</button>
+    <div class="card-footer" style="text-align: right">
+        <button type="button" class="show-note btn btn-secondary" data-id="{{this._id}}">Note</button>
+        <button type="button" class="save-article btn btn-success" data-id="{{this._id}}">Save</button>
+        <button type="button" class="delete-article btn btn-danger" data-id="{{this._id}}">Delete</button>
+    </div>
 </div>
+
+<!-- Modal -->
+        <div id="results-modal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+      
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+              </div>
+              <div class="modal-body">
+                <div id="notes"></div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-success" data-id="{{this._id}}" id="savenote">Save Note</button>
+              </div>
+            </div>
+      
+          </div>
+        </div>

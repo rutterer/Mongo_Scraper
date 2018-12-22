@@ -45,8 +45,9 @@ app.set("view engine", "handlebars");
 app.get("/", function(req, res) {
   db.Article.find({})
     .then(function(dbArticle) {
+      var dbArticleRev = dbArticle.reverse();
       var hbsObject = {
-        article: dbArticle 
+        article: dbArticleRev 
       }
       /* console.log(hbsObject); */
       res.render("index", hbsObject);
@@ -135,9 +136,21 @@ app.get("/articles", function(req, res) {
     });
 });
 
+app.get("/saved", function(req, res) {
+  db.Article.find({saved: true})
+    .then(function(dbArticle) {
+      var dbArticleRev = dbArticle.reverse();
+      var hbsObject = {
+        article: dbArticleRev 
+      }
+      /* console.log(hbsObject); */
+      res.render("index", hbsObject);
+    })
+});
+
 // Route for saving an article
-app.post("/saved/:id", function(req, res) {
-  
+app.put("/saved/:id", function(req, res) {
+  console.log(req.params.id);
   db.Article.findOneAndUpdate({ _id: req.params.id }, { $set: { saved: true }})
     .then(function(dbArticle) {
       // If we were able to successfully update an Article, send it back to the client
@@ -183,6 +196,20 @@ app.post("/articles/:id", function(req, res) {
       // If an error occurred, send it to the client
       res.json(err);
     });
+});
+
+// Route for deleting an article from db
+app.delete("/delete/:id", function(req, res) {
+
+  db.Article.deleteOne({_id: req.params.id}, function(err){})
+    .then(function(dbArticle) {
+      // If we were able to successfully delete an Article, inform client
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    }); 
 });
 
 // Start the server
